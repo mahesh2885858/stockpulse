@@ -1,6 +1,7 @@
 "use client";
 import { useAppSelector } from "@/lib/hooks";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Home() {
   const formatDate = (time: string) => {
@@ -9,6 +10,15 @@ export default function Home() {
     });
     return date.format(new Date(time));
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      const d = await fetch("/api/crypto");
+      const r = await d.json();
+      console.log({ r });
+    };
+    getData();
+  });
 
   const t = useAppSelector((state) => state.value);
   return (
