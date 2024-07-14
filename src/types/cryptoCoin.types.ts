@@ -1,6 +1,16 @@
+export type TCoinCodes = {
+  BTC: "Bitcoin";
+  ETH: "Ethereum";
+  USDT: "Tether";
+  BNB: "BNB";
+  SOL: "Solana";
+};
+
+export type TCoinNames = TCoinCodes[keyof TCoinCodes];
+
 export type TCoin = {
-  name: string;
-  symbol: string;
+  name: TCoinNames;
+  image: string;
   code: string;
   rate: string;
   cap: string;
@@ -13,6 +23,13 @@ export type TCoin = {
     year: string;
   };
 };
+
+export type TCoinFromDb = {
+  _id: string;
+  coinData: TCoin[];
+  timeStamp: string;
+}[];
+
 const t = [
   {
     name: "Bitcoin",
