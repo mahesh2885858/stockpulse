@@ -7,7 +7,7 @@ function ModalOverlay(props: TProps) {
   const { visible, children } = props;
   if (!visible) return null;
   return (
-    <div className="absolute w-full h-full flex justify-center items-center">
+    <div className="fixed w-full h-full flex justify-center items-center">
       {children}
     </div>
   );

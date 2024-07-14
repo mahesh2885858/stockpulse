@@ -25,7 +25,7 @@ function CoinChangeModal() {
   };
   return (
     <ModalOverlay visible={visible}>
-      <div className=" bg-black/80 w-52 shadow-yellow-300 rounded text-white flex flex-col p-5 gap-4 justify-center items-start">
+      <div className=" bg-[#171b26] w-52 shadow-yellow-300 rounded text-white flex flex-col p-5 gap-4 justify-center items-start">
         <div className="flex flex-col gap-4">
           {Object.keys(options).map((option) => {
             const coin = option as keyof TCoinCodes;
@@ -48,7 +48,7 @@ function CoinChangeModal() {
         </div>
         <div className="w-full flex justify-center gap-4">
           <button
-            className="bg-white/80 p-1 px-2 rounded-sm text-black"
+            className="bg-blue-500 p-1 px-2 rounded-sm text-white"
             onClick={() => {
               closeModal();
             }}
