@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { AppStore, makeStore } from "../lib/store";
+import LoadingIndicator from "../components/LoadingIndicator";
 export default function StoreProvider({
   children,
 }: {
@@ -19,7 +20,7 @@ export default function StoreProvider({
 
   return (
     <Provider store={storeRef.current}>
-      <PersistGate loading={<div>Loading....</div>} persistor={persistor}>
+      <PersistGate loading={<LoadingIndicator />} persistor={persistor}>
         {children}
       </PersistGate>
     </Provider>

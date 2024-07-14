@@ -6,7 +6,7 @@ import {
 } from "@/lib/features/crypto/cryptoSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import axios from "axios";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 
 function Timer() {
   const selectedCoin = useAppSelector((state) => state.selectedCoin);
@@ -15,16 +15,15 @@ function Timer() {
   const dispatch = useAppDispatch();
   let timeRef = useRef<any>();
 
+  const getData = useCallback(async () => {
+    const response = await axios("/api/crypto");
+    const data = response.data;
+    dispatch(getNewData(data.data));
+    dispatch(resetTimer());
+  }, [dispatch]);
+
   useEffect(() => {
     if (timer !== 1) return;
-
-    const getData = async () => {
-      const response = await axios("/api/crypto");
-      const data = response.data;
-      dispatch(getNewData(data.data));
-      dispatch(resetTimer());
-    };
-
     if (timer === 1) {
       clearInterval(timeRef.current);
       getData();
@@ -33,15 +32,17 @@ function Timer() {
 
   useEffect(() => {
     dispatch(getDataForSelectedCoin(selectedCoin));
-
     timeRef.current = setInterval(() => {
       dispatch(countTime());
     }, 1000);
-
     return () => {
       clearInterval(timeRef.current);
     };
   }, [value]);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return <p>Next update in {timer} sec</p>;
 }
