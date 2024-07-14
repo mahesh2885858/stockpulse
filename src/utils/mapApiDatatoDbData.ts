@@ -4,17 +4,17 @@ const mapApiDataToDbData = (data: any): TCoin[] => {
   return data.map((coin: any) => {
     return {
       name: coin.name,
-      symbol: coin.symbol,
       code: coin.code,
-      rate: coin.rate,
-      cap: coin.cap,
+      rate: coin.rate.toString(),
+      cap: coin.cap.toString(),
+      image: coin.png64,
       delta: {
-        hour: coin.delta.hour,
-        day: coin.delta.day,
-        week: coin.delta.week,
-        month: coin.delta.month,
-        quarter: coin.delta.quarter,
-        year: coin.delta.year,
+        hour: coin.delta.hour.toString(),
+        day: coin.delta.day.toString(),
+        week: coin.delta.week.toString(),
+        month: coin.delta.month.toString(),
+        quarter: coin.delta.quarter.toString(),
+        year: coin.delta.year.toString(),
       },
     };
   });
